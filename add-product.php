@@ -63,13 +63,13 @@
         <form action="process-add.php" method="POST">
 
             <label>Product Name</label>
-            <input type="text" name="product_name" required>
+            <input type="text" placeholder="Name" name="product_name" required>
             
             <div style="display: flex; gap: 15px;">
                 <div class="form-grp">
                     <label>Category</label>
                     <select class="dropdown-category" name="categories" id="categories-select" required>
-                        <option value="" disabled selected>Please choose an option</option>
+                        <option value="" disabled selected>Choose a Category</option>
                         <option value="beverages">Beverages</option>
                         <option value="snacks">Snacks</option>
                         <option value="household">Household</option>
@@ -83,12 +83,12 @@
                 </div>
                 <div class="form-grp">
                     <label>Price (₱)</label>
-                    <input type="number" step="0.01" name="price" required>
+                    <input type="number" placeholder="0.00" step="0.01" name="price" required>
                 </div>
             </div>
 
             <label>Stock Quantity</label>
-            <input type="number" name="stock_quantity" required>
+            <input type="number" placeholder="0" name="stock_quantity" required>
             
             <div class="save-container">
                 <button class="save" type="submit">
