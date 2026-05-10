@@ -7,6 +7,10 @@ $result = mysqli_query($conn, $query);*/
 
 ?>
 
+<!--
+    MAIN PAGE (VIEW PRODUCTS)
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
