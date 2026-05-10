@@ -85,41 +85,6 @@ if(sortSelect){
     });
 }
 
-// DUMMY FUNCTION TO SIMULATE EDIT BTN GETTING DATA FROM TABLE TO FORMS ======= CHANGE/REMOVE WHEN BACKEND IMPLEMENTATION
-const params = new URLSearchParams(window.location.search);
-if(params){
-    function fillForm(input, value){
-
-        const field = document.getElementById(input);
-
-        if(field){
-            field.value = params.get(value);
-        }
-
-    }
-
-    fillForm("pnamef", "pname");
-    fillForm("pcatf", "pcat");
-    fillForm("ppricef", "pprice");
-    fillForm("pstockf", "pstock");
-}
-
-//DUMMY FUNCTION TO SIMULATE SUBMIT ======= CHANGE/REMOVE WHEN BACKEND IMPLEMENTATION
-const forms = document.querySelectorAll("form");
-if(forms){
-    forms.forEach(form => {
-
-        form.addEventListener("submit", function(event){
-
-            event.preventDefault();
-
-            alert("Product saved successfully!");
-
-        });
-
-    });
-}
-
 // SEARCH FUNCTION (incase of implementation if have time)
 /*document.getElementById("searchInput").addEventListener("keyup", function() {
 

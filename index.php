@@ -1,9 +1,26 @@
 <?php
 
-/*include 'db_connect.php';
+include 'db_connect.php';
 
-$query = "SELECT * FROM products";
-$result = mysqli_query($conn, $query);*/
+$result = false;
+try {
+    $query = "SELECT * FROM products";
+    $result = mysqli_query($conn, $query);
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+$cat_info = [
+    1 => ['label' => 'Beverage',     'class' => 'beverage', 'slug' => 'beverages'],
+    2 => ['label' => 'Snack',        'class' => 'snack',    'slug' => 'snacks'],
+    3 => ['label' => 'Household',    'class' => 'house',    'slug' => 'household'],
+    4 => ['label' => 'Candy',        'class' => 'candy',    'slug' => 'candy'],
+    5 => ['label' => 'Personal Care','class' => 'care',     'slug' => 'care'],
+    6 => ['label' => 'Canned Goods', 'class' => 'can',      'slug' => 'canned'],
+    7 => ['label' => 'Bakery',       'class' => 'bakery',   'slug' => 'bakery'],
+    8 => ['label' => 'Frozen',       'class' => 'frozen',   'slug' => 'frozen'],
+    9 => ['label' => 'Other',        'class' => 'other',    'slug' => 'other'],
+];
 
 ?>
 
@@ -59,9 +76,8 @@ $result = mysqli_query($conn, $query);*/
                 <option value="stock-desc">Sort by Stock (Descending)</option>
             </select>
 
-            <!-- PLACEHOLDER VALUE ======= CHANGE WHEN BACKEND IMPLEMENTATION -->
             <div class="total">
-                <span>Total Products: 9</span>
+                <span>Total Products: <?php echo mysqli_num_rows($result); ?></span>
             </div>
         </div>
 
@@ -77,170 +93,29 @@ $result = mysqli_query($conn, $query);*/
                 </tr>
             </thead>
 
-            <!-- PLACEHOLDER TABLE DATA ======= CHANGE WHEN BACKEND IMPLEMENTATION -->
-
             <tbody id="productTable">
+                <?php while ($row = mysqli_fetch_assoc($result)):
+                    $cat = $cat_info[$row['category_id']] ?? ['label' => 'Other', 'class' => 'other', 'slug' => 'other'];
+                    $edit_url = "edit-product.php?pid=" . $row['id'];
+                ?>
                 <tr>
-                    <td>1</td>
-                    <td>Chips</td>
-                    <td><span class="snack">Snack</span></td>
-                    <td style="color: #00623E">₱10.00</td>
-                    <td>100</td>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= htmlspecialchars($row['product_name']) ?></td>
+                    <td><span class="<?= $cat['class'] ?>"><?= $cat['label'] ?></span></td>
+                    <td style="color: #00623E">₱<?= number_format($row['price'], 2) ?></td>
+                    <td><?= $row['stock_quantity'] ?></td>
                     <td class="edit-del">
-                        <a href="edit-product.php?pname=Chips&pcat=snacks&pprice=10.00&pstock=100" class="edit-btn">
+                        <a href="<?= $edit_url ?>" class="edit-btn">
                             <img src="images/edit.png" class="icon3">
                             <span> Edit </span>
                         </a>
-                        <a href="delete-product.php" class="delete-btn">    
+                        <a href="delete-product.php?id=<?= $row['id'] ?>" class="delete-btn">
                             <img src="images/delete.png" class="icon4">
                             <span> Delete </span>
                         </a>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Water</td>
-                    <td><span class="beverage">Beverage</span></td>
-                    <td style="color: #00623E">₱88.50</td>
-                    <td>50</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Water&pcat=beverages&pprice=88.50&pstock=50" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td>House Item</td>
-                    <td><span class="house">Household</span></td>
-                    <td style="color: #00623E">₱333.00</td>
-                    <td>30</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=House Item&pcat=household&pprice=333.00&pstock=30" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>4</td>
-                    <td>Mentos</td>
-                    <td><span class="candy">Candy</span></td>
-                    <td style="color: #00623E">₱60.50</td>
-                    <td>36</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Mentos&pcat=candy&pprice=60.50&pstock=36" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>5</td>
-                    <td>Tissue</td>
-                    <td><span class="care">Personal Care</span></td>
-                    <td style="color: #00623E">₱102.00</td>
-                    <td>27</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Tissue&pcat=care&pprice=102.00&pstock=27" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>6</td>
-                    <td>Tuna</td>
-                    <td><span class="can">Canned Goods</span></td>
-                    <td style="color: #00623E">₱90.00</td>
-                    <td>15</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Tuna&pcat=canned&pprice=90.00&pstock=15" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>7</td>
-                    <td>Cookies</td>
-                    <td><span class="bakery">Bakery</span></td>
-                    <td style="color: #00623E">₱53.00</td>
-                    <td>45</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Cookies&pcat=bakery&pprice=53.00&pstock=45" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>8</td>
-                    <td>Ice Cream</td>
-                    <td><span class="frozen">Frozen</span></td>
-                    <td style="color: #00623E">₱21.00</td>
-                    <td>13</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Ice Cream&pcat=frozen&pprice=21.00&pstock=13" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>9</td>
-                    <td>Magazine</td>
-                    <td><span class="other">Other</span></td>
-                    <td style="color: #00623E">₱33.00</td>
-                    <td>27</td>
-                    <td class="edit-del">
-                        <a href="edit-product.php?pname=Magazine&pcat=other&pprice=33.00&pstock=27" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php" class="delete-btn">    
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
-                    </td>
-                </tr>
+                <?php endwhile; ?>
             </tbody>
             
         </table>
