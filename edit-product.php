@@ -9,7 +9,7 @@ if ($pid <= 0) {
 }
 
 // Fetch product details using prepared statement
-$stmt = mysqli_prepare($conn, "SELECT * FROM products WHERE id = ?");
+$stmt = mysqli_prepare($conn, "SELECT * FROM products WHERE product_id = ?");
 mysqli_stmt_bind_param($stmt, "i", $pid);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -92,7 +92,7 @@ $selected_cat = $cat_slug[$product['category_id']] ?? 'other';
         </div>
         <form action="process-edit.php" method="POST">
 
-            <input type="hidden" name="id" value="<?= $product['id'] ?>">
+            <input type="hidden" name="id" value="<?= $product['product_id'] ?>">
 
             <label>Product Name</label>
             <input type="text" name="product_name" id="pnamef" value="<?= htmlspecialchars($product['product_name']) ?>" required>

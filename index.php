@@ -96,10 +96,10 @@ $cat_info = [
             <tbody id="productTable">
                 <?php while ($row = mysqli_fetch_assoc($result)):
                     $cat = $cat_info[$row['category_id']] ?? ['label' => 'Other', 'class' => 'other', 'slug' => 'other'];
-                    $edit_url = "edit-product.php?pid=" . $row['id'];
+                    $edit_url = "edit-product.php?pid=" . $row['product_id'];
                 ?>
                 <tr>
-                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['product_id'] ?></td>
                     <td><?= htmlspecialchars($row['product_name']) ?></td>
                     <td><span class="<?= $cat['class'] ?>"><?= $cat['label'] ?></span></td>
                     <td style="color: #00623E">₱<?= number_format($row['price'], 2) ?></td>
@@ -109,7 +109,7 @@ $cat_info = [
                             <img src="images/edit.png" class="icon3">
                             <span> Edit </span>
                         </a>
-                        <a href="delete-product.php?id=<?= $row['id'] ?>" class="delete-btn">
+                        <a href="delete-product.php?id=<?= $row['product_id'] ?>" class="delete-btn">
                             <img src="images/delete.png" class="icon4">
                             <span> Delete </span>
                         </a>

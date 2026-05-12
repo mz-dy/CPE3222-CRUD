@@ -11,14 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['product_name'];
 
     if (!empty($name)) {
-        // Database connection
-        $conn = new mysqli('localhost', 'root', '', 'stockntrack');
-
-        // Conn Error
-        if ($conn->connect_error) {
-            die('Connection failed: ' . $conn->connect_error);
-        }
-
         // Sanitise inputs
         // Remove whitespace, HTML tags, and special characters
         $product_name = trim(htmlspecialchars(strip_tags($name)));
@@ -36,17 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $category_id    = $category_map[$_POST['categories']] ?? null;
 
         if ($product_name && $category_id && $price >= 0 && $stock_quantity >= 0) {
-            $stmt = mysqli_prepare($conn, 
+            $stmt = mysqli_prepare($conn,
             "INSERT INTO products (product_name, category_id, price, stock_quantity)
-            VALUES (?, ?, ?, ?)");   
-        
+            VALUES (?, ?, ?, ?)");
+
             // Bind parameters and execute, binding: s = string, i = integer, d = double
             mysqli_stmt_bind_param($stmt, "sidi", $product_name, $category_id, $price, $stock_quantity);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
 
             header('Location: index.php');
-            exit();        
+            exit();
         } else {
             header('Location: add-product.php?error=invalid_input');
             exit();
