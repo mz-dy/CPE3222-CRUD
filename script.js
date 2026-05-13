@@ -1,18 +1,17 @@
 // DELETE CONFIRMATION
+/*
 document.querySelectorAll(".delete-btn").forEach(button => {
 
     button.addEventListener("click", function(event) {
 
-        if(confirm("Are you sure you want to delete this product?")){
-            //this.parentElement.parentElement.remove();
+        if(!confirm("Are you sure you want to delete this product?")){
             event.preventDefault();
-
-            alert("Product deleted successfully!");
         }
 
     });
 
 });
+*/
 
 //SORT TABLE (no need backend, frontend sorting based on table values)
 const sortSelect = document.getElementById("sortSelect");

@@ -1,8 +1,8 @@
 <?php
 include 'db_connect.php';
 
-// Get product ID from query parameter
-$pid = isset($_GET['pid']) ? (int)$_GET['pid'] : 0;
+// Get product ID from POST data
+$pid = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 if ($pid <= 0) {
     header('Location: index.php');
     exit();

@@ -33,7 +33,7 @@ $cat_info = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convenience Store Product Tracker</title>
+    <title>Stock 'n Track</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Bricolage Grotesque' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
@@ -96,7 +96,6 @@ $cat_info = [
             <tbody id="productTable">
                 <?php while ($row = mysqli_fetch_assoc($result)):
                     $cat = $cat_info[$row['category_id']] ?? ['label' => 'Other', 'class' => 'other', 'slug' => 'other'];
-                    $edit_url = "edit-product.php?pid=" . $row['product_id'];
                 ?>
                 <tr>
                     <td><?= $row['product_id'] ?></td>
@@ -105,14 +104,20 @@ $cat_info = [
                     <td style="color: #00623E">₱<?= number_format($row['price'], 2) ?></td>
                     <td><?= $row['stock_quantity'] ?></td>
                     <td class="edit-del">
-                        <a href="<?= $edit_url ?>" class="edit-btn">
-                            <img src="images/edit.png" class="icon3">
-                            <span> Edit </span>
-                        </a>
-                        <a href="delete-product.php?id=<?= $row['product_id'] ?>" class="delete-btn">
-                            <img src="images/delete.png" class="icon4">
-                            <span> Delete </span>
-                        </a>
+                        <form method="POST" action="edit-product.php" style="display:inline;">
+                            <input type="hidden" name="id" value="<?= $row['product_id'] ?>">
+                            <button type="submit" class="edit-btn">
+                                <img src="images/edit.png" class="icon3">
+                                <span> Edit </span>
+                            </button>
+                        </form>
+                        <form method="POST" action="delete-product.php" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                            <input type="hidden" name="id" value="<?= $row['product_id'] ?>">
+                            <button type="submit" class="delete-btn">
+                                <img src="images/delete.png" class="icon4">
+                                <span> Delete </span>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 <?php endwhile; ?>

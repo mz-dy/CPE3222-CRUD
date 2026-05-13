@@ -3,6 +3,7 @@
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Sanitise and validate inputs
     $product_id = (int) $_POST['id'] ?? 0;
     $product_name = trim(htmlspecialchars(strip_tags($_POST['product_name'])));
     $price = (float) $_POST['price'];
