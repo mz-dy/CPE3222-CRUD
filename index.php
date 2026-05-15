@@ -63,6 +63,7 @@ $cat_info = [
 <div class="main">
     <div class="caption">
         <h1>Product Inventory</h1>
+        <p>View your tracked products below.</p>
     </div>
 
     <div class="container">
@@ -127,11 +128,12 @@ $cat_info = [
 
     </div>
 
-    <footer>
-        <p>© 2026 Stock n' Track</p>
-        <a href="#top" class="back-to-top">Back to Top</a>
-    </footer>
+    
 </div>
+<footer>
+    <p>© 2026 Stock n' Track</p>
+    <a href="#top" class="back-to-top">Back to Top</a>
+</footer>
 
 <script src="script.js"></script>
 
