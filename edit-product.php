@@ -131,12 +131,12 @@ $selected_cat = $cat_slug[$product['category_id']] ?? 'other';
         </form>
     </div>
 
-    <footer>
-        <p>© 2026 Stock n' Track</p>
-    </footer>
+
 
 </div>
-
+<footer>
+    <p>© 2026 Stock n' Track</p>
+</footer>
 <script src="script.js"></script>
 
 </body>
