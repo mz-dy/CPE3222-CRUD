@@ -1,19 +1,4 @@
-// DELETE CONFIRMATION
-/*
-document.querySelectorAll(".delete-btn").forEach(button => {
-
-    button.addEventListener("click", function(event) {
-
-        if(!confirm("Are you sure you want to delete this product?")){
-            event.preventDefault();
-        }
-
-    });
-
-});
-*/
-
-//SORT TABLE (no need backend, frontend sorting based on table values)
+//SORT TABLE (frontend sorting based on table values)
 const sortSelect = document.getElementById("sortSelect");
 if(sortSelect){
     sortSelect.addEventListener("change", function(){
@@ -83,23 +68,3 @@ if(sortSelect){
     rows.forEach(row => tbody.appendChild(row));
     });
 }
-
-// SEARCH FUNCTION (incase of implementation if have time)
-/*document.getElementById("searchInput").addEventListener("keyup", function() {
-
-    let filter = this.value.toLowerCase();
-    let rows = document.querySelectorAll("#productTable tr");
-
-    rows.forEach(row => {
-
-        let productName = row.cells[1].textContent.toLowerCase();
-
-        if(productName.includes(filter)){
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-
-    });
-
-});*/
